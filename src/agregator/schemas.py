@@ -1,6 +1,6 @@
 
-from datetime import datetime, date, time, timedelta
-from typing import Dict, List
+from datetime import date, time, timedelta
+from typing import Dict, List, Union
 from pydantic import AnyHttpUrl, BaseModel
 
 
@@ -16,7 +16,7 @@ class WorkSchedule(BaseModel):
 
 class StudioInfo(BaseModel):
     name: str
-    adress: str
+    adress: Union[str, List]
     phone : str
     website: AnyHttpUrl
     workschedule: WorkSchedule

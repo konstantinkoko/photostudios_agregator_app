@@ -61,7 +61,6 @@ class StudiosManager:
         for time in day_time:
             schedule[time] = {}
         for studio in data_list:
-                #total_schedule['date'] = studio['date']
                 total_schedule['studios_info'][studio['studio_info']['name']] = studio['studio_info']
                 studio_start_working_time = studio['studio_info']['workschedule']['start']
                 studio_end_working_time = studio['studio_info']['workschedule']['finish']
