@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ schedule['date'] }}</title>
+    <link href="{{ url_for('static', path='/schedule.css') }}" rel="stylesheet">
+</head>
+<body>
+    {% if schedule['warning_mode'] %}
+        <h2 class="warning">Будте внимательны: большинство фотостудий ограничивают online бронирование день в день менее чем за 12 часов до съёмки. Поэтому информация может быть неполной!</h2>
+    {% endif %}
+    <div class="grid template-2">
+        {% for time in schedule["schedule"].keys() %}
+            <form class="col" action="/schedule/{{ schedule["date"] }}/{{ time }}" method="post">
+                <input name="studios_info" type="hidden" value="{{ schedule["studios_info"] }}">
+                <input name="time_info" type="hidden" value="{{ schedule["schedule"][time] }}">
+                <button type="submit">
+                    <h2>{{ time }}</h2>
+                    <p>свободных студий:</p>
+                    <p>{{ schedule['schedule'][time].keys()|length }}</p>
+                </button>
+            </form>
+        {% endfor %}
+    </div>
+</body>
+</html>

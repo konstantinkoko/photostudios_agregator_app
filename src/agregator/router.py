@@ -4,7 +4,6 @@ from agregator.photostudios_parcer.studios_manager import StudiosManager
 from agregator.schemas import Query, Schedule, StudioInfo
 
 
-
 router = APIRouter()
 
 

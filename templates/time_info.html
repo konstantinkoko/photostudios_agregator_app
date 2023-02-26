@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ date }}, {{ time }}</title>
+    <link href="{{ url_for('static', path='/time_info.css') }}" rel="stylesheet">
+</head>
+<body>
+    <div class="grid template-2">
+        {% for studio in time_info.keys() %}
+            <div class="col">
+                <h3><a href={{ studios_info[studio]['website'] }}>{{ studio }}:</a></h3>
+                {% for room in time_info[studio] %}
+                    <h6>{{ room }} ({{ time_info[studio][room] }})</h6>
+                {% endfor %} 
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

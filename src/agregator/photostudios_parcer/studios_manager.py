@@ -19,11 +19,11 @@ class StudiosManager:
     
     async def get_schedule(self, query: Query) -> Schedule:
         self.filter_list = query.filter_list
-        data_json = await self._get_studios_data_list(query.date)
+        data_json = await self._get_studios_data_list(query.picked_date)
         data = [json.loads(studio) for studio in data_json]
         self.data = self._format_data(data)
-        self.data["warning_mode"] = True if query.date == datetime.date.today() else False
-        self.data["date"] = query.date
+        self.data["warning_mode"] = True if query.picked_date == datetime.date.today() else False
+        self.data["date"] = query.picked_date
         return self.data
 
     async def _get_studios_data_list(self, date : datetime.date) -> list:

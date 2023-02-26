@@ -1,22 +1,21 @@
-from datetime import date, datetime
-from fastapi import APIRouter, Depends, Form, Request
-from fastapi.staticfiles import StaticFiles
+import ast
+from datetime import date, time
+
+from fastapi import APIRouter, Form, Request, Depends
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
 
 from agregator.router import get_studios_list, get_schedule
-from agregator.schemas import Query, Schedule
-
+from agregator.schemas import Query
 
 router = APIRouter()
 
-router.mount("/static", StaticFiles(directory="web_interface/static"), name="static")
-templates = Jinja2Templates(directory="web_interface/templates")
+templates = Jinja2Templates(directory="../templates")
 
 
-@router.post("/", response_class=HTMLResponse)
+@router.get("/", response_class=HTMLResponse)
 async def date_picker(request: Request):
-    current_date = datetime.date.today()
+    current_date = date.today()
     studios_list = await get_studios_list()
     return templates.TemplateResponse("date_picker.html", {
         "request": request,
@@ -25,8 +24,8 @@ async def date_picker(request: Request):
     })
 
 
-@router.post("/schedule/{date}", response_class=HTMLResponse)
-async def get_schedule(request: Request, date: date, query: Query):
+@router.post("/schedule/date", response_class=HTMLResponse)
+async def get_schedule_page(request: Request, query: Query = Depends()):
     schedule = await get_schedule(query)
     return templates.TemplateResponse("schedule.html", {
         "request": request,
@@ -35,13 +34,14 @@ async def get_schedule(request: Request, date: date, query: Query):
 
 
 @router.post("/schedule/{date}/{time}", response_class=HTMLResponse)
-async def get_time_info(request: Request, date: date, time: str, schedule: Schedule = Form()):
-    studios_info = schedule["studios_info"]
-    time_info = schedule["schedule"]["time"]
+async def get_time_info(request: Request, date: date, time: time, studios_info = Form(...), time_info = Form(...)):
+    studios_info_dict = ast.literal_eval(studios_info)
+    time_info_dict = ast.literal_eval(time_info)
+    time_str = time.strftime("%H:%M")
     return templates.TemplateResponse("time_info.html", {
         "request": request,
-        "studios_info": studios_info,
-        "time_info": time_info,
+        "studios_info": studios_info_dict,
+        "time_info": time_info_dict,
         "date": date,
-        "time": time
+        "time": time_str
     })

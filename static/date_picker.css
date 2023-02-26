@@ -1,0 +1,35 @@
+body {
+    background: black;
+    text-align: center;
+}
+h2 {
+    color: white;    
+}
+a {
+   text-decoration: none; 
+}
+a:link {
+    color: white; 
+    border-bottom: 1px dashed; 
+}
+a:visited {
+    color: white;
+}
+a:hover {
+    color: white; 
+    border-bottom: .07em solid;
+}
+a:active {
+    color: white; 
+    border-bottom: 1px dashed;
+}
+.checkboxgroup {
+    border: 0px;
+}
+.submitbutton {
+    padding: 5px 15px;
+    background: #99e0b2;
+    border: 0 none;
+    cursor: pointer;
+    border-radius: 5px;
+}

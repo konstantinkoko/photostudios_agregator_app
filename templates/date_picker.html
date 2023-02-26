@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Выбор даты</title>
+    <link href="{{ url_for('static', path='/date_picker.css') }}" rel="stylesheet">
+</head>
+<body>
+    <h2>Агрегатор фотостудий г. Пермь</h2>
+    <form class="form" action="/schedule/date" method="post">
+        <input name="picked_date" type="date" min={{ current_date }} value={{ current_date }}>
+        <fieldset class="checkboxgroup">
+        {% for studio in studios_info %}
+            <p><input name="filter_list" type="checkbox" value="{{ studio }}"><a href="{{ studios_info[studio]['website'] }}">{{ studio }}</a></p>
+        {% endfor %}
+        </fieldset>
+        <input class="submitbutton" type="submit" value="Go!">
+    </form>
+</body>
+</html>
