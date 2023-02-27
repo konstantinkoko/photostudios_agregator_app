@@ -10,5 +10,6 @@ studios_list = [
     'photostudio_leika',
     'photostudio_okna',
     'photostudio_iris',
-    'photostudio_arthouse'
+    'photostudio_arthouse',
+    'photostudio_fabrika_alendvic'
 ]

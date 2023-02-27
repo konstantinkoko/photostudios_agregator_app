@@ -24,7 +24,7 @@ async def date_picker(request: Request):
     })
 
 
-@router.post("/schedule/date", response_class=HTMLResponse)
+@router.post("/schedule", response_class=HTMLResponse)
 async def get_schedule_page(request: Request, query: Query = Depends()):
     schedule = await get_schedule(query)
     return templates.TemplateResponse("schedule.html", {
@@ -33,7 +33,7 @@ async def get_schedule_page(request: Request, query: Query = Depends()):
     })
 
 
-@router.post("/schedule/{date}/{time}", response_class=HTMLResponse)
+@router.post("/{date}/{time}", response_class=HTMLResponse)
 async def get_time_info(request: Request, date: date, time: time, studios_info = Form(...), time_info = Form(...)):
     studios_info_dict = ast.literal_eval(studios_info)
     time_info_dict = ast.literal_eval(time_info)

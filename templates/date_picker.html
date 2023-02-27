@@ -9,7 +9,7 @@
 </head>
 <body>
     <h2>Агрегатор фотостудий г. Пермь</h2>
-    <form class="form" action="/schedule/date" method="post">
+    <form class="form" action="/schedule" method="post">
         <input name="picked_date" type="date" min={{ current_date }} value={{ current_date }}>
         <fieldset class="checkboxgroup">
         {% for studio in studios_info %}

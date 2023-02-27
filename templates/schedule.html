@@ -13,10 +13,10 @@
     {% endif %}
     <div class="grid template-2">
         {% for time in schedule["schedule"].keys() %}
-            <form class="col" action="/schedule/{{ schedule["date"] }}/{{ time }}" method="post">
+            <form class="col" action="/{{ schedule["date"] }}/{{ time }}" method="post">
                 <input name="studios_info" type="hidden" value="{{ schedule["studios_info"] }}">
                 <input name="time_info" type="hidden" value="{{ schedule["schedule"][time] }}">
-                <button type="submit">
+                <button class="button" type="submit">
                     <h2>{{ time }}</h2>
                     <p>свободных студий:</p>
                     <p>{{ schedule['schedule'][time].keys()|length }}</p>
