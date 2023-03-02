@@ -1,11 +1,17 @@
 
 from datetime import date, time, timedelta
 from fastapi import Form
-from pydantic import AnyHttpUrl, BaseModel
+from pydantic import AnyHttpUrl, BaseModel, validator
 
 class BaseQuery(BaseModel):
     picked_date: date
     filter_list: list[str]
+
+    @validator("picked_date")
+    def ensure_date_range(cls, picked_date):
+        if not date.today() <= picked_date:
+            raise ValueError("Must be in range")
+        return picked_date
 
 
 class Query(BaseQuery):
