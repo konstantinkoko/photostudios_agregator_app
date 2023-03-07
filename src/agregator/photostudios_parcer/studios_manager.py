@@ -16,7 +16,6 @@ class StudiosManager:
             self.filter_info_dict[studio.data['studio_info']['name']] = studio.data['studio_info']
         self.data = {}
 
-    
     async def get_schedule(self, query: Query) -> Schedule:
         self.filter_list = query.filter_list
         data_json = await self._get_studios_data_list(query.picked_date)
@@ -34,12 +33,6 @@ class StudiosManager:
                 studios_data_list.append(await studio.get_schedule(date))
         return studios_data_list
 
-    def get_free_studios_count(self) -> dict:
-        free_studios_count = {}
-        for time in self.data['schedule']:
-            free_studios_count[time] = len(self.data['schedule'][time])
-        return free_studios_count
-    
     def _get_filtered_data(self, data : list[dict]) -> list:
         filtered_data = []
         for studio in data:

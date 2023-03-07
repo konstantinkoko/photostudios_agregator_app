@@ -19,6 +19,4 @@ async def test_photostudios_positive(photostudio):
 @pytest.mark.parametrize("photostudio, yesterday", [(photostudio, date.today() - timedelta(days=1)) for photostudio in studios_list])
 async def test_photostudios_negative(photostudio, yesterday):
     studio = importlib.import_module(f"src.agregator.photostudios_parcer.photostudios.{photostudio}")
-    """with pytest.raises(ValueError):
-        studio.get_schedule(yesterday)"""
     assert await studio.get_schedule(yesterday)
